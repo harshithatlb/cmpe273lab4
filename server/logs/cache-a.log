@@ -1,0 +1,207 @@
+INFO  [2015-05-23 19:41:10,952] edu.sjsu.cmpe.cache.CacheService: Loaded resources
+WARN  [2015-05-23 19:41:11,008] com.yammer.dropwizard.config.ServerFactory: 
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!    THIS SERVICE HAS NO HEALTHCHECKS. THIS MEANS YOU WILL NEVER KNOW IF IT    !
+!    DIES IN PRODUCTION, WHICH MEANS YOU WILL NEVER KNOW IF YOU'RE LETTING     !
+!     YOUR USERS DOWN. YOU SHOULD ADD A HEALTHCHECK FOR EACH DEPENDENCY OF     !
+!     YOUR SERVICE WHICH FULLY (BUT LIGHTLY) TESTS YOUR SERVICE'S ABILITY TO   !
+!      USE THAT SERVICE. THINK OF IT AS A CONTINUOUS INTEGRATION TEST.         !
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+INFO  [2015-05-23 19:41:11,095] com.yammer.dropwizard.cli.ServerCommand: Starting cache-server
+INFO  [2015-05-23 19:41:11,097] org.eclipse.jetty.server.Server: jetty-8.y.z-SNAPSHOT
+INFO  [2015-05-23 19:41:11,343] com.sun.jersey.server.impl.application.WebApplicationImpl: Initiating Jersey application, version 'Jersey: 1.17.1 02/28/2013 12:47 PM'
+INFO  [2015-05-23 19:41:11,451] com.yammer.dropwizard.config.Environment: The following paths were found for the configured resources:
+
+    DELETE  /cache/{key} (edu.sjsu.cmpe.cache.api.resources.CacheResource)
+    GET     /cache/ (edu.sjsu.cmpe.cache.api.resources.CacheResource)
+    GET     /cache/{key} (edu.sjsu.cmpe.cache.api.resources.CacheResource)
+    PUT     /cache/{key}/{value} (edu.sjsu.cmpe.cache.api.resources.CacheResource)
+
+INFO  [2015-05-23 19:41:11,452] com.yammer.dropwizard.config.Environment: tasks = 
+
+    POST    /tasks/gc (com.yammer.dropwizard.tasks.GarbageCollectionTask)
+
+WARN  [2015-05-23 19:41:12,050] org.eclipse.jetty.util.component.AbstractLifeCycle: FAILED InstrumentedBlockingChannelConnector@0.0.0.0:3000: java.net.BindException: Address already in use
+! java.net.BindException: Address already in use
+! at sun.nio.ch.Net.bind0(Native Method) ~[na:1.7.0_75]
+! at sun.nio.ch.Net.bind(Net.java:444) ~[na:1.7.0_75]
+! at sun.nio.ch.Net.bind(Net.java:436) ~[na:1.7.0_75]
+! at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:214) ~[na:1.7.0_75]
+! at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:74) ~[na:1.7.0_75]
+! at org.eclipse.jetty.server.nio.BlockingChannelConnector.open(BlockingChannelConnector.java:127) ~[server-0.0.1-SNAPSHOT.jar:na]
+! at org.eclipse.jetty.server.AbstractConnector.doStart(AbstractConnector.java:316) ~[server-0.0.1-SNAPSHOT.jar:na]
+! at org.eclipse.jetty.server.nio.BlockingChannelConnector.doStart(BlockingChannelConnector.java:85) ~[server-0.0.1-SNAPSHOT.jar:na]
+! at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64) [server-0.0.1-SNAPSHOT.jar:na]
+! at org.eclipse.jetty.server.Server.doStart(Server.java:291) [server-0.0.1-SNAPSHOT.jar:na]
+! at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64) [server-0.0.1-SNAPSHOT.jar:na]
+! at com.yammer.dropwizard.cli.ServerCommand.run(ServerCommand.java:48) [server-0.0.1-SNAPSHOT.jar:na]
+! at com.yammer.dropwizard.cli.EnvironmentCommand.run(EnvironmentCommand.java:39) [server-0.0.1-SNAPSHOT.jar:na]
+! at com.yammer.dropwizard.cli.ConfiguredCommand.run(ConfiguredCommand.java:58) [server-0.0.1-SNAPSHOT.jar:na]
+! at com.yammer.dropwizard.cli.Cli.run(Cli.java:53) [server-0.0.1-SNAPSHOT.jar:na]
+! at com.yammer.dropwizard.Service.run(Service.java:61) [server-0.0.1-SNAPSHOT.jar:na]
+! at edu.sjsu.cmpe.cache.CacheService.main(CacheService.java:23) [server-0.0.1-SNAPSHOT.jar:na]
+WARN  [2015-05-23 19:41:12,051] org.eclipse.jetty.util.component.AbstractLifeCycle: FAILED SocketConnector@0.0.0.0:7000: java.net.BindException: Address already in use
+! java.net.BindException: Address already in use
+! at java.net.PlainSocketImpl.socketBind(Native Method) ~[na:1.7.0_75]
+! at java.net.AbstractPlainSocketImpl.bind(AbstractPlainSocketImpl.java:376) ~[na:1.7.0_75]
+! at java.net.ServerSocket.bind(ServerSocket.java:376) ~[na:1.7.0_75]
+! at java.net.ServerSocket.<init>(ServerSocket.java:237) ~[na:1.7.0_75]
+! at java.net.ServerSocket.<init>(ServerSocket.java:181) ~[na:1.7.0_75]
+! at org.eclipse.jetty.server.bio.SocketConnector.newServerSocket(SocketConnector.java:96) ~[server-0.0.1-SNAPSHOT.jar:na]
+! at org.eclipse.jetty.server.bio.SocketConnector.open(SocketConnector.java:85) ~[server-0.0.1-SNAPSHOT.jar:na]
+! at org.eclipse.jetty.server.AbstractConnector.doStart(AbstractConnector.java:316) ~[server-0.0.1-SNAPSHOT.jar:na]
+! at org.eclipse.jetty.server.bio.SocketConnector.doStart(SocketConnector.java:156) ~[server-0.0.1-SNAPSHOT.jar:na]
+! at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64) [server-0.0.1-SNAPSHOT.jar:na]
+! at org.eclipse.jetty.server.Server.doStart(Server.java:291) [server-0.0.1-SNAPSHOT.jar:na]
+! at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64) [server-0.0.1-SNAPSHOT.jar:na]
+! at com.yammer.dropwizard.cli.ServerCommand.run(ServerCommand.java:48) [server-0.0.1-SNAPSHOT.jar:na]
+! at com.yammer.dropwizard.cli.EnvironmentCommand.run(EnvironmentCommand.java:39) [server-0.0.1-SNAPSHOT.jar:na]
+! at com.yammer.dropwizard.cli.ConfiguredCommand.run(ConfiguredCommand.java:58) [server-0.0.1-SNAPSHOT.jar:na]
+! at com.yammer.dropwizard.cli.Cli.run(Cli.java:53) [server-0.0.1-SNAPSHOT.jar:na]
+! at com.yammer.dropwizard.Service.run(Service.java:61) [server-0.0.1-SNAPSHOT.jar:na]
+! at edu.sjsu.cmpe.cache.CacheService.main(CacheService.java:23) [server-0.0.1-SNAPSHOT.jar:na]
+WARN  [2015-05-23 19:41:12,051] org.eclipse.jetty.util.component.AbstractLifeCycle: FAILED org.eclipse.jetty.server.Server@301cd5c4: MultiException[java.net.BindException: Address already in use, java.net.BindException: Address already in use]
+! org.eclipse.jetty.util.MultiException: Multiple exceptions
+! at org.eclipse.jetty.server.Server.doStart(Server.java:273) ~[server-0.0.1-SNAPSHOT.jar:na]
+! at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64) ~[server-0.0.1-SNAPSHOT.jar:na]
+! at com.yammer.dropwizard.cli.ServerCommand.run(ServerCommand.java:48) [server-0.0.1-SNAPSHOT.jar:na]
+! at com.yammer.dropwizard.cli.EnvironmentCommand.run(EnvironmentCommand.java:39) [server-0.0.1-SNAPSHOT.jar:na]
+! at com.yammer.dropwizard.cli.ConfiguredCommand.run(ConfiguredCommand.java:58) [server-0.0.1-SNAPSHOT.jar:na]
+! at com.yammer.dropwizard.cli.Cli.run(Cli.java:53) [server-0.0.1-SNAPSHOT.jar:na]
+! at com.yammer.dropwizard.Service.run(Service.java:61) [server-0.0.1-SNAPSHOT.jar:na]
+! at edu.sjsu.cmpe.cache.CacheService.main(CacheService.java:23) [server-0.0.1-SNAPSHOT.jar:na]
+ERROR [2015-05-23 19:41:12,052] com.yammer.dropwizard.cli.ServerCommand: Unable to start server, shutting down
+! org.eclipse.jetty.util.MultiException: Multiple exceptions
+! at org.eclipse.jetty.server.Server.doStart(Server.java:273) ~[server-0.0.1-SNAPSHOT.jar:na]
+! at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64) ~[server-0.0.1-SNAPSHOT.jar:na]
+! at com.yammer.dropwizard.cli.ServerCommand.run(ServerCommand.java:48) ~[server-0.0.1-SNAPSHOT.jar:na]
+! at com.yammer.dropwizard.cli.EnvironmentCommand.run(EnvironmentCommand.java:39) [server-0.0.1-SNAPSHOT.jar:na]
+! at com.yammer.dropwizard.cli.ConfiguredCommand.run(ConfiguredCommand.java:58) [server-0.0.1-SNAPSHOT.jar:na]
+! at com.yammer.dropwizard.cli.Cli.run(Cli.java:53) [server-0.0.1-SNAPSHOT.jar:na]
+! at com.yammer.dropwizard.Service.run(Service.java:61) [server-0.0.1-SNAPSHOT.jar:na]
+! at edu.sjsu.cmpe.cache.CacheService.main(CacheService.java:23) [server-0.0.1-SNAPSHOT.jar:na]
+INFO  [2015-05-23 19:41:12,052] org.eclipse.jetty.server.Server: Graceful shutdown SocketConnector@0.0.0.0:7000
+INFO  [2015-05-23 19:41:12,052] org.eclipse.jetty.server.Server: Graceful shutdown InstrumentedBlockingChannelConnector@0.0.0.0:3000
+INFO  [2015-05-23 19:41:12,056] org.eclipse.jetty.server.Server: Graceful shutdown o.e.j.s.ServletContextHandler{/,null}
+INFO  [2015-05-23 19:41:12,056] org.eclipse.jetty.server.Server: Graceful shutdown o.e.j.s.ServletContextHandler{/,null}
+INFO  [2015-05-23 19:41:14,059] org.eclipse.jetty.server.handler.ContextHandler: stopped o.e.j.s.ServletContextHandler{/,null}
+INFO  [2015-05-23 19:41:14,060] org.eclipse.jetty.server.handler.ContextHandler: stopped o.e.j.s.ServletContextHandler{/,null}
+INFO  [2015-05-23 19:43:49,528] edu.sjsu.cmpe.cache.CacheService: Loaded resources
+WARN  [2015-05-23 19:43:49,559] com.yammer.dropwizard.config.ServerFactory: 
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!    THIS SERVICE HAS NO HEALTHCHECKS. THIS MEANS YOU WILL NEVER KNOW IF IT    !
+!    DIES IN PRODUCTION, WHICH MEANS YOU WILL NEVER KNOW IF YOU'RE LETTING     !
+!     YOUR USERS DOWN. YOU SHOULD ADD A HEALTHCHECK FOR EACH DEPENDENCY OF     !
+!     YOUR SERVICE WHICH FULLY (BUT LIGHTLY) TESTS YOUR SERVICE'S ABILITY TO   !
+!      USE THAT SERVICE. THINK OF IT AS A CONTINUOUS INTEGRATION TEST.         !
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+INFO  [2015-05-23 19:43:49,640] com.yammer.dropwizard.cli.ServerCommand: Starting cache-server
+INFO  [2015-05-23 19:43:49,642] org.eclipse.jetty.server.Server: jetty-8.y.z-SNAPSHOT
+INFO  [2015-05-23 19:43:49,868] com.sun.jersey.server.impl.application.WebApplicationImpl: Initiating Jersey application, version 'Jersey: 1.17.1 02/28/2013 12:47 PM'
+INFO  [2015-05-23 19:43:49,944] com.yammer.dropwizard.config.Environment: The following paths were found for the configured resources:
+
+    DELETE  /cache/{key} (edu.sjsu.cmpe.cache.api.resources.CacheResource)
+    GET     /cache/ (edu.sjsu.cmpe.cache.api.resources.CacheResource)
+    GET     /cache/{key} (edu.sjsu.cmpe.cache.api.resources.CacheResource)
+    PUT     /cache/{key}/{value} (edu.sjsu.cmpe.cache.api.resources.CacheResource)
+
+INFO  [2015-05-23 19:43:49,945] com.yammer.dropwizard.config.Environment: tasks = 
+
+    POST    /tasks/gc (com.yammer.dropwizard.tasks.GarbageCollectionTask)
+
+WARN  [2015-05-23 19:43:50,444] org.eclipse.jetty.util.component.AbstractLifeCycle: FAILED InstrumentedBlockingChannelConnector@0.0.0.0:3000: java.net.BindException: Address already in use
+! java.net.BindException: Address already in use
+! at sun.nio.ch.Net.bind0(Native Method) ~[na:1.7.0_75]
+! at sun.nio.ch.Net.bind(Net.java:444) ~[na:1.7.0_75]
+! at sun.nio.ch.Net.bind(Net.java:436) ~[na:1.7.0_75]
+! at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:214) ~[na:1.7.0_75]
+! at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:74) ~[na:1.7.0_75]
+! at org.eclipse.jetty.server.nio.BlockingChannelConnector.open(BlockingChannelConnector.java:127) ~[server-0.0.1-SNAPSHOT.jar:na]
+! at org.eclipse.jetty.server.AbstractConnector.doStart(AbstractConnector.java:316) ~[server-0.0.1-SNAPSHOT.jar:na]
+! at org.eclipse.jetty.server.nio.BlockingChannelConnector.doStart(BlockingChannelConnector.java:85) ~[server-0.0.1-SNAPSHOT.jar:na]
+! at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64) [server-0.0.1-SNAPSHOT.jar:na]
+! at org.eclipse.jetty.server.Server.doStart(Server.java:291) [server-0.0.1-SNAPSHOT.jar:na]
+! at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64) [server-0.0.1-SNAPSHOT.jar:na]
+! at com.yammer.dropwizard.cli.ServerCommand.run(ServerCommand.java:48) [server-0.0.1-SNAPSHOT.jar:na]
+! at com.yammer.dropwizard.cli.EnvironmentCommand.run(EnvironmentCommand.java:39) [server-0.0.1-SNAPSHOT.jar:na]
+! at com.yammer.dropwizard.cli.ConfiguredCommand.run(ConfiguredCommand.java:58) [server-0.0.1-SNAPSHOT.jar:na]
+! at com.yammer.dropwizard.cli.Cli.run(Cli.java:53) [server-0.0.1-SNAPSHOT.jar:na]
+! at com.yammer.dropwizard.Service.run(Service.java:61) [server-0.0.1-SNAPSHOT.jar:na]
+! at edu.sjsu.cmpe.cache.CacheService.main(CacheService.java:23) [server-0.0.1-SNAPSHOT.jar:na]
+WARN  [2015-05-23 19:43:50,445] org.eclipse.jetty.util.component.AbstractLifeCycle: FAILED SocketConnector@0.0.0.0:7000: java.net.BindException: Address already in use
+! java.net.BindException: Address already in use
+! at java.net.PlainSocketImpl.socketBind(Native Method) ~[na:1.7.0_75]
+! at java.net.AbstractPlainSocketImpl.bind(AbstractPlainSocketImpl.java:376) ~[na:1.7.0_75]
+! at java.net.ServerSocket.bind(ServerSocket.java:376) ~[na:1.7.0_75]
+! at java.net.ServerSocket.<init>(ServerSocket.java:237) ~[na:1.7.0_75]
+! at java.net.ServerSocket.<init>(ServerSocket.java:181) ~[na:1.7.0_75]
+! at org.eclipse.jetty.server.bio.SocketConnector.newServerSocket(SocketConnector.java:96) ~[server-0.0.1-SNAPSHOT.jar:na]
+! at org.eclipse.jetty.server.bio.SocketConnector.open(SocketConnector.java:85) ~[server-0.0.1-SNAPSHOT.jar:na]
+! at org.eclipse.jetty.server.AbstractConnector.doStart(AbstractConnector.java:316) ~[server-0.0.1-SNAPSHOT.jar:na]
+! at org.eclipse.jetty.server.bio.SocketConnector.doStart(SocketConnector.java:156) ~[server-0.0.1-SNAPSHOT.jar:na]
+! at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64) [server-0.0.1-SNAPSHOT.jar:na]
+! at org.eclipse.jetty.server.Server.doStart(Server.java:291) [server-0.0.1-SNAPSHOT.jar:na]
+! at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64) [server-0.0.1-SNAPSHOT.jar:na]
+! at com.yammer.dropwizard.cli.ServerCommand.run(ServerCommand.java:48) [server-0.0.1-SNAPSHOT.jar:na]
+! at com.yammer.dropwizard.cli.EnvironmentCommand.run(EnvironmentCommand.java:39) [server-0.0.1-SNAPSHOT.jar:na]
+! at com.yammer.dropwizard.cli.ConfiguredCommand.run(ConfiguredCommand.java:58) [server-0.0.1-SNAPSHOT.jar:na]
+! at com.yammer.dropwizard.cli.Cli.run(Cli.java:53) [server-0.0.1-SNAPSHOT.jar:na]
+! at com.yammer.dropwizard.Service.run(Service.java:61) [server-0.0.1-SNAPSHOT.jar:na]
+! at edu.sjsu.cmpe.cache.CacheService.main(CacheService.java:23) [server-0.0.1-SNAPSHOT.jar:na]
+WARN  [2015-05-23 19:43:50,445] org.eclipse.jetty.util.component.AbstractLifeCycle: FAILED org.eclipse.jetty.server.Server@301cd5c4: MultiException[java.net.BindException: Address already in use, java.net.BindException: Address already in use]
+! org.eclipse.jetty.util.MultiException: Multiple exceptions
+! at org.eclipse.jetty.server.Server.doStart(Server.java:273) ~[server-0.0.1-SNAPSHOT.jar:na]
+! at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64) ~[server-0.0.1-SNAPSHOT.jar:na]
+! at com.yammer.dropwizard.cli.ServerCommand.run(ServerCommand.java:48) [server-0.0.1-SNAPSHOT.jar:na]
+! at com.yammer.dropwizard.cli.EnvironmentCommand.run(EnvironmentCommand.java:39) [server-0.0.1-SNAPSHOT.jar:na]
+! at com.yammer.dropwizard.cli.ConfiguredCommand.run(ConfiguredCommand.java:58) [server-0.0.1-SNAPSHOT.jar:na]
+! at com.yammer.dropwizard.cli.Cli.run(Cli.java:53) [server-0.0.1-SNAPSHOT.jar:na]
+! at com.yammer.dropwizard.Service.run(Service.java:61) [server-0.0.1-SNAPSHOT.jar:na]
+! at edu.sjsu.cmpe.cache.CacheService.main(CacheService.java:23) [server-0.0.1-SNAPSHOT.jar:na]
+ERROR [2015-05-23 19:43:50,446] com.yammer.dropwizard.cli.ServerCommand: Unable to start server, shutting down
+! org.eclipse.jetty.util.MultiException: Multiple exceptions
+! at org.eclipse.jetty.server.Server.doStart(Server.java:273) ~[server-0.0.1-SNAPSHOT.jar:na]
+! at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64) ~[server-0.0.1-SNAPSHOT.jar:na]
+! at com.yammer.dropwizard.cli.ServerCommand.run(ServerCommand.java:48) ~[server-0.0.1-SNAPSHOT.jar:na]
+! at com.yammer.dropwizard.cli.EnvironmentCommand.run(EnvironmentCommand.java:39) [server-0.0.1-SNAPSHOT.jar:na]
+! at com.yammer.dropwizard.cli.ConfiguredCommand.run(ConfiguredCommand.java:58) [server-0.0.1-SNAPSHOT.jar:na]
+! at com.yammer.dropwizard.cli.Cli.run(Cli.java:53) [server-0.0.1-SNAPSHOT.jar:na]
+! at com.yammer.dropwizard.Service.run(Service.java:61) [server-0.0.1-SNAPSHOT.jar:na]
+! at edu.sjsu.cmpe.cache.CacheService.main(CacheService.java:23) [server-0.0.1-SNAPSHOT.jar:na]
+INFO  [2015-05-23 19:43:50,446] org.eclipse.jetty.server.Server: Graceful shutdown SocketConnector@0.0.0.0:7000
+INFO  [2015-05-23 19:43:50,446] org.eclipse.jetty.server.Server: Graceful shutdown InstrumentedBlockingChannelConnector@0.0.0.0:3000
+INFO  [2015-05-23 19:43:50,447] org.eclipse.jetty.server.Server: Graceful shutdown o.e.j.s.ServletContextHandler{/,null}
+INFO  [2015-05-23 19:43:50,448] org.eclipse.jetty.server.Server: Graceful shutdown o.e.j.s.ServletContextHandler{/,null}
+INFO  [2015-05-23 19:43:52,450] org.eclipse.jetty.server.handler.ContextHandler: stopped o.e.j.s.ServletContextHandler{/,null}
+INFO  [2015-05-23 19:43:52,451] org.eclipse.jetty.server.handler.ContextHandler: stopped o.e.j.s.ServletContextHandler{/,null}
+INFO  [2015-05-23 19:50:56,415] edu.sjsu.cmpe.cache.CacheService: Loaded resources
+WARN  [2015-05-23 19:50:56,482] com.yammer.dropwizard.config.ServerFactory: 
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!    THIS SERVICE HAS NO HEALTHCHECKS. THIS MEANS YOU WILL NEVER KNOW IF IT    !
+!    DIES IN PRODUCTION, WHICH MEANS YOU WILL NEVER KNOW IF YOU'RE LETTING     !
+!     YOUR USERS DOWN. YOU SHOULD ADD A HEALTHCHECK FOR EACH DEPENDENCY OF     !
+!     YOUR SERVICE WHICH FULLY (BUT LIGHTLY) TESTS YOUR SERVICE'S ABILITY TO   !
+!      USE THAT SERVICE. THINK OF IT AS A CONTINUOUS INTEGRATION TEST.         !
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+INFO  [2015-05-23 19:50:56,614] com.yammer.dropwizard.cli.ServerCommand: Starting cache-server
+INFO  [2015-05-23 19:50:56,617] org.eclipse.jetty.server.Server: jetty-8.y.z-SNAPSHOT
+INFO  [2015-05-23 19:50:56,836] com.sun.jersey.server.impl.application.WebApplicationImpl: Initiating Jersey application, version 'Jersey: 1.17.1 02/28/2013 12:47 PM'
+INFO  [2015-05-23 19:50:56,920] com.yammer.dropwizard.config.Environment: The following paths were found for the configured resources:
+
+    DELETE  /cache/{key} (edu.sjsu.cmpe.cache.api.resources.CacheResource)
+    GET     /cache/ (edu.sjsu.cmpe.cache.api.resources.CacheResource)
+    GET     /cache/{key} (edu.sjsu.cmpe.cache.api.resources.CacheResource)
+    PUT     /cache/{key}/{value} (edu.sjsu.cmpe.cache.api.resources.CacheResource)
+
+INFO  [2015-05-23 19:50:56,921] com.yammer.dropwizard.config.Environment: tasks = 
+
+    POST    /tasks/gc (com.yammer.dropwizard.tasks.GarbageCollectionTask)
+
+INFO  [2015-05-23 19:50:57,450] org.eclipse.jetty.server.AbstractConnector: Started InstrumentedBlockingChannelConnector@0.0.0.0:3000
+INFO  [2015-05-23 19:50:57,452] org.eclipse.jetty.server.AbstractConnector: Started SocketConnector@0.0.0.0:7000
