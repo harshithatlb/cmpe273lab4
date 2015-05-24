@@ -24,13 +24,6 @@ public class InMemoryCache implements CacheInterface {
 
         return newEntry;
     }
-    
-    @Override
-    public Entry delete(Long key) {
-        checkArgument(key > 0,
-                "Key was %s but expected greater than zero value", key);
-        return inMemoryMap.remove(key);
-    }
 
     @Override
     public Entry get(Long key) {
@@ -42,5 +35,11 @@ public class InMemoryCache implements CacheInterface {
     @Override
     public List<Entry> getAll() {
         return new ArrayList<Entry>(inMemoryMap.values());
+    }
+    @Override
+    public void delete (Long key)
+    {
+    
+	inMemoryMap.remove(key);
     }
 }
