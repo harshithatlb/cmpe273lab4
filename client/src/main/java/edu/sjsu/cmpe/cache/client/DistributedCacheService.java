@@ -1,8 +1,7 @@
 package edu.sjsu.cmpe.cache.client;
-
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.Future;
-import java.util.concurrent.atomic.AtomicInteger;
-
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
@@ -14,107 +13,229 @@ import com.mashape.unirest.http.exceptions.UnirestException;
  * 
  */
 public class DistributedCacheService implements CacheServiceInterface {
-    private final String cacheServerUrl;
-    private String value;
-    public static AtomicInteger successCount = new AtomicInteger();
-
-    public DistributedCacheService(String serverUrl) {
-        this.cacheServerUrl = serverUrl;
+    private final String cacheServerUrl1;
+    private final String cacheServerUrl2;
+    private final String cacheServerUrl3;
+    int success =0;
+    int fail = 0;
+	
+    public DistributedCacheService(String server1, String server2, String server3) {
+        this.cacheServerUrl1 = server1;
+	this.cacheServerUrl2 = server2;
+	this.cacheServerUrl3 = server3;
     }
 
     /**
      * @see edu.sjsu.cmpe.cache.client.CacheServiceInterface#get(long)
      */
     @Override
-    public Future<HttpResponse<JsonNode>> get(long key) {
-    	Future<HttpResponse<JsonNode>> future = Unirest
-    			.get(this.cacheServerUrl + "/cache/{key}")
-                .header("accept", "application/json")
-                .header("Accept-Content-Encoding", "gzip")
-                .routeParam("key", Long.toString(key))
-                .asJsonAsync(new Callback<JsonNode>() {	
-    	            public void failed(UnirestException e) {
-    	                System.out.println("The fetch request has failed for " + getServerName());
-    	            }
-    	
-    	            public void completed(HttpResponse<JsonNode> response) {
-    	            	value = response.getBody().getObject().getString("value");
-    	            	System.out.println("The fetch request has completed for " + getServerName());
-    	            }
-    	
-    	            public void cancelled() {
-    	                System.out.println("The fetch request has been cancelled for " + getServerName());
-    	            }	
-    	        });
+    public String get(long key) {
+	final Map<String, String> rm = new HashMap<String, String>();
+	String r1="";
+	String r2 ="";
+	String r3 = "";
+        Future<HttpResponse<JsonNode>>  response1 = Unirest.get(this.cacheServerUrl1 + "/cache/{key}")
+                    .header("accept", "application/json")
+                    .routeParam("key", Long.toString(key))
+                    .asJsonAsync(new Callback<JsonNode>(){
+				public void failed(UnirestException e){
+					rm.put("r1","FAILED1");
+				}
+				public void completed(HttpResponse<JsonNode> response){
+					rm.put("r1", response.getBody().getObject().getString("value"));
+}
+				public void cancelled(){}
+});
+               Future<HttpResponse<JsonNode>>  response2 = Unirest.get(this.cacheServerUrl2 + "/cache/{key}")
+                    .header("accept", "application/json")
+                    .routeParam("key", Long.toString(key))
+                    .asJsonAsync(new Callback<JsonNode>(){
+				public void failed(UnirestException e){
+					rm.put("r2","FAILED1");
+				}
+				public void completed(HttpResponse<JsonNode> response){
+					rm.put("r2", response.getBody().getObject().getString("value"));
+				}
+				public void cancelled(){}
+});
+	        Future<HttpResponse<JsonNode>>  response3 = Unirest.get(this.cacheServerUrl3 + "/cache/{key}")
+                    .header("accept", "application/json")
+                    .routeParam("key", Long.toString(key))
+                    .asJsonAsync(new Callback<JsonNode>(){
+				public void failed(UnirestException e){
+					rm.put("r3","FAILED1");
+				}
+				public void completed(HttpResponse<JsonNode> response){
+					rm.put("r3", response.getBody().getObject().getString("value"));
+}
+				public void cancelled(){}
+});
+	try{
+	Thread.sleep(1000);
+	} catch (InterruptedException e) {
+           e.printStackTrace();
+        }
+	if(rm.containsKey("r1"))
+		r1 = rm.get("r1");
+	else r1 = "";
+	if(rm.containsKey("r2"))
+		r2 = rm.get("r2");
+	else r2 = "";
+	if(rm.containsKey("r3"))
+		r3 = rm.get("r3");
+	else r3 = "";
+	
+	
+        String value = null;
+	if(r1.equals(r2) && r2.equals(r3)){
+		value = r1;
+	}
+	else{
+		if(r1.equals(r2)){
+			put(key,r1,cacheServerUrl3);	
+			value = r1;
+		}
+		else if( r2.equals(r3)){
+			put(key, r2,cacheServerUrl1);
+			value = r2;
+		}
+		else if(r1.equals(r3)){
+			put(key,r2,cacheServerUrl1);
+			value = r1;
+		}
+	}	 
 
-        return future;
-    }
-    
-    public String getValue() {
-    	return this.value;
+        return value;
     }
 
     /**
-     * @see edu.sjsu.cmpe.cache.client.CacheServiceInterface#put(long, java.lang.String)
+     * @see edu.sjsu.cmpe.cache.client.CacheServiceInterface#put(long,
+     *      java.lang.String)
      */
     @Override
-    public Future<HttpResponse<JsonNode>> put(long key, String value) {
-    	Future<HttpResponse<JsonNode>> future = Unirest
-	        .put(this.cacheServerUrl + "/cache/{key}/{value}")
-	        .header("accept", "application/json")
-	        .routeParam("key", Long.toString(key))
-	        .routeParam("value", value)
-	        .asJsonAsync(new Callback<JsonNode>() {	
-	            public void failed(UnirestException e) {	            	
-	                System.out.println("The save request has failed for " + getServerName());
-	            }
-	
-	            public void completed(HttpResponse<JsonNode> response) {
-	            	successCount.incrementAndGet();
-	            	System.out.println("The save request has completed for " + getServerName());
-	            }
-	
-	            public void cancelled() {
-	                System.out.println("The save request has been cancelled for " + getServerName());
-	            }
-	        });
-    	
-    	return future;   	
+    public void put(long key, String value) {
+        success = 0;
+	fail = 0;
+           Future<HttpResponse<JsonNode>> response = Unirest
+                    .put(this.cacheServerUrl1 + "/cache/{key}/{value}")
+                    .header("accept", "application/json")
+                    .routeParam("key", Long.toString(key))
+                    .routeParam("value", value)
+		    .asJsonAsync(new Callback<JsonNode>()
+		     {
+			public void failed(UnirestException e) {
+				fail++;
+			}
+			public void completed(HttpResponse<JsonNode> response) {
+				success++;
+			}
+			public void cancelled() {
+				System.out.println("The request has been cancelled");
+			}
+			});
+	Future<HttpResponse<JsonNode>> future2 = Unirest
+		.put(this.cacheServerUrl2 + "/cache/{key}/{value}")
+		.header("accept", "application/json")
+		.routeParam("key", Long.toString(key))
+		.routeParam("value", value)
+		.asJsonAsync(new Callback<JsonNode>() {
+			public void failed(UnirestException e) {
+				fail++;
+			}	
+			public void completed(HttpResponse<JsonNode> response) {
+				success++;
+			}
+			public void cancelled() {
+				System.out.println("The request has been cancelled");
+			}
+		});
+	Future<HttpResponse<JsonNode>> future3 = Unirest
+		.put(this.cacheServerUrl3 + "/cache/{key}/{value}")
+		.header("accept", "application/json")
+		.routeParam("key", Long.toString(key))
+		.routeParam("value", value)
+		.asJsonAsync(new Callback<JsonNode>() {
+			public void failed(UnirestException e) {
+				fail++;
+			}
+			public void completed(HttpResponse<JsonNode> response) {
+				success++;
+			}
+			public void cancelled() {
+				System.out.println("The request has been cancelled");
+			}
+		});
+	try {
+		Thread.sleep(1000);
+	} catch (InterruptedException e1) {
+		// TODO Auto-generated catch block
+		e1.printStackTrace();
+	}
+	if (fail > 1) {
+		System.out.println("Deleting the entries");
+		Future<HttpResponse<JsonNode>> d1 = Unirest
+		.delete(this.cacheServerUrl1 + "/cache/{key}")
+		.header("accept", "application/json")
+		.routeParam("key", Long.toString(key))
+		.asJsonAsync(new Callback<JsonNode>() {
+		public void failed(UnirestException e) {
+			}
+		public void completed(HttpResponse<JsonNode> response) {
+		}
+		public void cancelled() {
+		}
+	});
+	Future<HttpResponse<JsonNode>> d2 = Unirest
+		.delete(this.cacheServerUrl2 + "/cache/{key}")
+		.header("accept", "application/json")
+		.routeParam("key", Long.toString(key))
+		.asJsonAsync(new Callback<JsonNode>() {
+		public void failed(UnirestException e) {
+		}
+		public void completed(HttpResponse<JsonNode> response) {
+		}
+		public void cancelled() {
+		}
+	});
+	Future<HttpResponse<JsonNode>> d3 = Unirest
+			.delete(this.cacheServerUrl3 + "/cache/{key}")
+			.header("accept", "application/json")
+			.routeParam("key", Long.toString(key))
+			.asJsonAsync(new Callback<JsonNode>() {
+			public void failed(UnirestException e) {
+			}
+			public void completed(HttpResponse<JsonNode> response) {
+			}
+			public void cancelled() {
+			}
+		});
+	try {
+		Thread.sleep(1000);
+	} catch (InterruptedException e1) {
+	// TODO Auto-generated catch block
+		e1.printStackTrace();
+		}
+	}
+	//end if
     }
-    
-    /**
-     * @see edu.sjsu.cmpe.cache.client.CacheServiceInterface#delete(long)
-     */
-    @Override
-    public Future<HttpResponse<JsonNode>> delete(long key) {
-    	Future<HttpResponse<JsonNode>> future = Unirest
-    		.delete(this.cacheServerUrl + "/cache/{key}")
-	        .header("accept", "application/json")
-	        .routeParam("key", Long.toString(key))
-	        .asJsonAsync(new Callback<JsonNode>() {	        	
-	            public void failed(UnirestException e) {
-	                System.out.println("The delete request has failed for " + getServerName());
-	            }
-	
-	            public void completed(HttpResponse<JsonNode> response) {
-	            	System.out.println("The delete request has completed for " + getServerName());
-	            }
-	
-	            public void cancelled() {
-	                System.out.println("The delete request has been cancelled for " + getServerName());
-	            }	
-	        });
-        return future;
-    }
-    
-    public String getServerName() {
-    	if (this.cacheServerUrl.contains("3000")) {
-    		return "Server_A";
-    	} else if (this.cacheServerUrl.contains("3001")) {
-    		return "Server_B";
-    	} else if (this.cacheServerUrl.contains("3002")) {
-    		return "Server_C";
-    	}	
-    	return null;
+/**
+* @see edu.sjsu.cmpe.cache.client.CacheServiceInterface#put(long,
+* java.lang.String)
+*/
+    public void put(long key, String value, String server) {
+      	HttpResponse<JsonNode> response = null;
+	try {
+		response = Unirest.put(server + "/cache/{key}/{value}")
+			.header("accept", "application/json")
+			.routeParam("key", Long.toString(key))
+			.routeParam("value", value).asJson();
+	} 
+	catch (UnirestException e) {
+		System.err.println(e);
+	}
+	if (response.getCode() != 200) {
+		System.out.println("Failed to add to the cache.");
+	}
     }
 }
+	
