@@ -49,7 +49,7 @@
               <transformers>
                 <transformer />
                 <transformer>
-                  <mainClass>edu.sjsu.cmpe.cache.client.Client</mainClass>
+                  <mainClass>edu.sjsu.cmpe.cache.client.CRDT_Client</mainClass>
                 </transformer>
               </transformers>
             </configuration>

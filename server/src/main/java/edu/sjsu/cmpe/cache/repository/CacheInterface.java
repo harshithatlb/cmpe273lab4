@@ -20,15 +20,6 @@ public interface CacheInterface {
      * @return an entry instance
      */
     Entry save(Entry newEntry);
-    
-    /**
-     * Delete an existing entry by key
-     * 
-     * @param key
-     *            a valid key
-     * @return a entry instance
-     */
-    Entry delete(Long key);
 
     /**
      * Retrieve an existing entry by key
@@ -45,5 +36,6 @@ public interface CacheInterface {
      * @return a list of entries
      */
     List<Entry> getAll();
+    void delete (Long key);
 
 }

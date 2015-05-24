@@ -1,17 +1,13 @@
 package edu.sjsu.cmpe.cache.domain;
 
-import java.io.Serializable;
-
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.joda.time.DateTime;
 
-public class Entry implements Serializable {
-	
-	private static final long serialVersionUID = 1L;
+public class Entry {
 
-	@NotNull
+    @NotNull
     private long key;
 
     @NotEmpty
